@@ -68,8 +68,23 @@ to
 ```
 (though I suspect a Rust expert could optimize this further).
 
+
+### Results
+![](https://pierrepeterlongo.github.io/minimal_increment_CBF/images/minimal_increase_CBF_results.png)
+In this experiment, I created a Bloom filter with 50 million cells (*m=50000000*), using *k=7* hash functions and storing *b=4* bits per cell. I stored an increasing number of elements (random DNA words of length 31) in the filter (x-axis), with each element being inserted between 1 and 10 times (randomly).  
+The results compare the "minimal increase counting Bloom filter" (*min_inc_cBF*) with a classical counting Bloom filter (*cBF*). 
+
+The blue curves show the average overestimation rate when querying stored elements (no false positives here).  
+We can see that the *min_inc_cBF* overestimation rate is 2 to 3 times smaller than that of the *cBF*. The orange curves show the indexing time, confirming the first drawback listed below.
+
+Interestingly, for the usual ratio of *n/m < 10%* (where *n* is the number of stored elements), the results highlight that this approach performs very well for these typical values, as shown in the zoomed-in view below:
+
+![](https://pierrepeterlongo.github.io/minimal_increment_CBF/images/minimal_increase_CBF_results_head.png)
+
 ### No free lunch
-This modification has three main drawbacks:
+The watchfull readed certainly noticed that this approach introduces some weaknesses. 
+
+I identified three main drawbacks:
 - Adding an element takes slightly more time, as there are two passes on the counters, and binary-stored values need to be converted to integers.
 - Adding an element is not parallelizable (since the minimum must be collected). 
 - Decreasing the abundance of an element is no longer possible. For example: 
@@ -78,20 +93,9 @@ This modification has three main drawbacks:
 
 In this case, the abundance of *a* is reported as 0, even though it was inserted once and never removed.
 
-### Results
-![](https://pierrepeterlongo.github.io/minimal_increment_CBF/images/minimal_increase_CBF_results.png)
-In this experiment, I created a Bloom filter with 50 million cells (*m=50000000*), using *k=7* hash functions and storing *b=4* bits per cell. I stored an increasing number of elements (random DNA words of length 31) in the filter (x-axis), with each element being inserted between 1 and 10 times (randomly).  
-The results compare the "minimal increase counting Bloom filter" (*min_inc_cBF*) with a classical counting Bloom filter (*cBF*). 
-
-The blue curves show the average overestimation rate when querying stored elements (no false positives here).  
-We can see that the *min_inc_cBF* overestimation rate is 2 to 3 times smaller than that of the *cBF*. The orange curves show the indexing time, confirming the first drawback listed earlier.
-
-Interestingly, for the usual ratio of *n/m < 0.1* (where *n* is the number of stored elements), the results highlight that this approach performs very well for these typical values, as shown in the zoomed-in view below:
-
-![](https://pierrepeterlongo.github.io/minimal_increment_CBF/images/minimal_increase_CBF_results_head.png)
-
 ### Prototype (Rust)
-See [https://github.com/pierrepeterlongo/minimal_increment_CBF](https://github.com/pierrepeterlongo/minimal_increment_CBF)
+See [https://github.com/pierrepeterlongo/minimal_increment_CBF](https://github.com/pierrepeterlongo/minimal_increment_CBF).
+This prototype enables to reproduce results and to reuse the rust code API.
 
 ### What's next?
 We should improve the Rust code. Additionally, math enthusiasts could propose a formula to estimate the expected average overestimation rate based on *k*, *m*, *b*, and the number of stored elements and their abundances.
