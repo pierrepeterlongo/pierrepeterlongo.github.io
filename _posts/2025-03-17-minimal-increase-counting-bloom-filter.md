@@ -88,10 +88,9 @@ I identified three main drawbacks:
 - Adding an element takes slightly more time, as there are two passes on the counters, and binary-stored values need to be converted to integers.
 - Adding an element is not parallelizable (since the minimum must be collected). 
 - Decreasing the abundance of an element is no longer possible. For example: 
-
 ![](https://pierrepeterlongo.github.io/minimal_increment_CBF/images/min_inc_cbf_decrease.png)
-
 In this case, the abundance of *a* is reported as 0, even though it was inserted once and never removed.
+- As noted by Antoine Limasset: The final state of the counters depends on the insertion order. For instance, with same hash values as in our previous example, inserting *b*, then *c*, then *a*, generates the filter [2,1,2]. In this case, *a* decomes overestimated, while the minimal increase strategy still enables to avoid overestimations for *b* and for *c*.
 
 ### Prototype (Rust)
 See [https://github.com/pierrepeterlongo/minimal_increment_CBF](https://github.com/pierrepeterlongo/minimal_increment_CBF).
@@ -107,3 +106,6 @@ Please contact me if you're interested: pierre.peterlongo@inria.fr
 [1] Fan, Li, et al. "Summary cache: a scalable wide-area web cache sharing protocol." IEEE/ACM Transactions on Networking 8.3 (2000): 281-293.
 
 [2] Rottenstreich, Ori, Yossi Kanizo, and Isaac Keslassy. "The variable-increment counting Bloom filter." IEEE/ACM Transactions on Networking 22.4 (2013): 1092-1105.
+
+--- 
+Edited on March 20, 2025
