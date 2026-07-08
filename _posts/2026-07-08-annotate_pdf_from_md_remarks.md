@@ -8,7 +8,7 @@ It **turns an original pdf** (including line numbers) **and a text file with rem
 
 ### Example
 
-- Here is an original pdf (`my_pdf.df`) created with latex, using the `{lineno}` package and starting the document with the `\linenumbers` instruction
+- Here is an original pdf (`my_pdf.pdf`) created with latex, using the `{lineno}` package and starting the document with the `\linenumbers` instruction
 
 
 ![original pdf](/images/original.png)
