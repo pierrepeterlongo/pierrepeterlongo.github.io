@@ -11,7 +11,7 @@ It **turns an original pdf** (including line numbers) **and a text file with rem
 - Here is an original pdf (`my_pdf.df`) created with latex, using the `{lineno}` package and starting the document with the `\linenumbers` instruction
 
 
-![original pdf](/_images/original.png)
+![original pdf](/images/original.png)
 
 - Here is a text file `remarks.txt` with some remarks
 
@@ -31,7 +31,7 @@ annotate-pdf-from-remarks \
 
 - Resulting PDF:
 
-![annotated pdf](/_images/annotated.png)
+![annotated pdf](/images/annotated.png)
 
 In this PDF, each remark appears at its corresponding line, and is clickable (note that how these annotations are displayed likely depends on the PDF viewer you use).
 
@@ -51,7 +51,7 @@ l1727: absent line
 
 The report contains this erroneous line.
 
-![annotated pdf with errors](/_images/annotated_with_errors.png)
+![annotated pdf with errors](/images/annotated_with_errors.png)
 
 ### More details
 
