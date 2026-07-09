@@ -1,6 +1,6 @@
 ## Annotate pdf from text (.md or .txt files) remarks
 
-I had to annotate a large PDF (a PhD manuscript) without a tablet, and I was too lazy to click through several toolbar buttons for every single remark. So I built this tool (with some AI help, to save time). Hopefully it's useful to others too."
+I had to annotate a large PDF (a PhD manuscript) without a tablet, and I was too lazy to click through several toolbar buttons for every single remark. So I built this tool (with some AI help, to save time). Hopefully it's useful to others too.
 
 It **turns an original pdf** (including line numbers) **and a text file with remarks** related to some lines into an **annotated pdf**.
 
@@ -39,7 +39,7 @@ The resulting pdf includes on the first page a short report with the name of the
 
 ### In case of errors
 
-Any lines from your remark file that fail to parse are flagged in the short report on the first page. For example, this happens if the remark file references a line number that doesn't exist:"
+Any lines from your remark file that fail to parse are flagged in the short report on the first page. For example, this happens if the remark file references a line number that doesn't exist:
 
 Let us add a bad entry, refering to a non existing line 1727.
 
